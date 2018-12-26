@@ -1,0 +1,8 @@
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
+cask "atom"
+cask "font-hack"
+cask "google-backup-and-sync"
+cask "iterm2"
+cask "spotify"
