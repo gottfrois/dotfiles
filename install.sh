@@ -58,28 +58,28 @@ do
   ln -s $DOTFILES/$FILE $HOME/$FILE
 done
 
-if ! [ -d $(HOME)/.nvm/.git ]
+if ! [ -d $HOME/.nvm/.git ]
 then
   echo "Installing NPM..."
-  git clone https://github.com/creationix/nvm.git $(HOME)/.nvm
-  . $(HOME)/.nvm/nvm.sh; nvm install --lts
+  git clone https://github.com/creationix/nvm.git $HOME/.nvm
+  . $HOME/.nvm/nvm.sh; nvm install --lts
   echo "Installing Node packages..."
-  . $(HOME)/.nvm/nvm.sh; npm install -g $(shell cat install/Npmfile)
+  . $HOME/.nvm/nvm.sh; npm install -g $(cat $DOTFILES/install/Npmfile)
 fi
 
-if ! [ -f $(HOME)/.rvm/VERSION ]
+if ! [ -f $HOME/.rvm/VERSION ]
 then
   echo "Installing RVM..."
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
   curl -sSL https://get.rvm.io | bash -s stable --ruby
   echo "Installing Ruby gems..."
-  gem install $(shell cat install/Gemfile)
+  gem install $(cat $DOTFILES/install/Gemfile)
 fi
 
-if ! [ -d $(HOME)/.atom/packages ]
+if ! [ -d $HOME/.atom/packages ]
 then
   echo "Installing Atom packages..."
-  apm install --packages-file install/Atomfile
+  apm install --packages-file $DOTFILES/install/Atomfile
 fi
 
 echo "Creating symlink ${HOME}/.mackup.cfg => ${DOTFILES}/config/.mackup.cfg"
