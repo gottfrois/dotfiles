@@ -2,7 +2,7 @@
 
 dockutil --no-restart --remove all
 dockutil --no-restart --add "/Applications/Safari.app"
-dockutil --no-restart --add "/Applications/Chrome.app"
+dockutil --no-restart --add "/Applications/Google Chrome.app"
 dockutil --no-restart --add "/Applications/Calendar.app"
 dockutil --no-restart --add "/Applications/App Store.app"
 dockutil --no-restart --add "/Applications/System Preferences.app"
