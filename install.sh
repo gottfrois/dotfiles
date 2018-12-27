@@ -26,6 +26,10 @@ echo "Setting up your Mac..."
 mkdir -p "$DOTFILES"
 eval "$CMD"
 
+echo "This scripts needs to install things with root permissions"
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 echo "Installing brew..."
 if test ! $(which brew); then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
