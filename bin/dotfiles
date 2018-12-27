@@ -14,6 +14,7 @@ sub_help () {
   echo "   edit             Open dotfiles in IDE ($DOTFILES_IDE) and Git GUI ($DOTFILES_GIT_GUI)"
   echo "   help             This help message"
   echo "   macos            Apply macOS system defaults"
+  echo "   restore          Restore applications settings using mackup"
   echo "   update           Update packages and pkg managers (OS, brew, npm, gem)"
 }
 
@@ -23,19 +24,26 @@ sub_edit () {
 }
 
 sub_update () {
+  echo "Updating system..."
   sudo softwareupdate -i -a
   brew update
   brew upgrade
   npm install npm -g
   npm update -g
-  gem update --system
-  gem update
+  rvm get stable
 }
 
 sub_clean () {
+  echo "Cleaning caches..."
   brew cleanup
   gem cleanup
   . "$NVM_DIR/nvm.sh"; nvm cache clear
+  rvm cleanup all
+}
+
+sub_restore () {
+  echo "Restoring applications settings..."
+  mackup restore
 }
 
 sub_macos () {

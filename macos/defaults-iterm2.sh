@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # set system-wide hotkey to show/hide iterm with ^\`

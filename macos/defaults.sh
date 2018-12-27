@@ -1,4 +1,6 @@
-COMPUTER_NAME="mac-mini"
+#!/usr/bin/env bash
+
+COMPUTER_NAME="Pierre-Louis's Mac"
 
 osascript -e 'tell application "System Preferences" to quit'
 
@@ -23,6 +25,9 @@ defaults write NSGlobalDomain AppleLanguages -array "en"
 defaults write NSGlobalDomain AppleLocale -string "fr_FR@currency=EUR"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Custom DateFormat
+# defaults write com.apple.menuextra.clock DateFormat "EEE MMM d  H:mm"
 
 # Set the timezone (see `sudo systemsetup -listtimezones` for other values)
 sudo systemsetup -settimezone "Europe/Paris" > /dev/null
@@ -79,6 +84,9 @@ sudo systemsetup -setrestartfreeze on
 
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+# Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 
 ###############################################################################
 # Keyboard & Input                                                            #
@@ -221,8 +229,11 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
 
 ###############################################################################
-# Dock                                                                        #
+# Dock, Dashboard and hot corners                                             #
 ###############################################################################
+
+# Dark menu bar and dock
+defaults write $HOME/Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme -string "Dark"
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
@@ -247,6 +258,29 @@ defaults write com.apple.dock wvous-br-corner -int 0
 
 # Don't show recently used applications in the Dock
 defaults write com.Apple.Dock show-recents -bool false
+
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -bool true
+
+# Don’t show Dashboard as a Space
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-tr-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
+defaults write com.apple.dock wvous-br-modifier -int 0
 
 ###############################################################################
 # Mail                                                                        #
@@ -296,6 +330,12 @@ defaults write com.apple.iCal "Show Week Numbers" -bool true
 
 # Week starts on monday
 defaults write com.apple.iCal "first day of week" -int 1
+
+# Day starts at 9AM
+defaults write com.apple.ical "first minute of work hours" -int 540
+
+# Show 24 hours a day
+defaults write com.apple.ical "number of hours displayed" -int 24
 
 ###############################################################################
 # Spotlight                                                                   #
@@ -348,6 +388,21 @@ defaults write com.apple.terminal "Startup Window Settings" -string "Pro"
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
 ###############################################################################
+# Safari & Webkit                                                             #
+###############################################################################
+
+# Privacy: don’t send search queries to Apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+###############################################################################
+# Time Machine                                                                #
+###############################################################################
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
 
@@ -363,6 +418,13 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 # Sort Activity Monitor results by CPU usage
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+###############################################################################
+# Photos                                                                      #
+###############################################################################
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
 # Software Updates                                                            #
@@ -390,6 +452,6 @@ defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" "Messages" "Photos" "Safari" "SystemUIServer" "Terminal" "iCal"; do
   killall "${app}" &> /dev/null
 done
