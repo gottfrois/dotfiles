@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-COMPUTER_NAME="Pierre-Louis's Mac"
+COMPUTER_NAME="gottfrois"
 
 osascript -e 'tell application "System Preferences" to quit'
 
