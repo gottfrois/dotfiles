@@ -3,7 +3,6 @@
 BIN_NAME=$(basename "$0")
 COMMAND_NAME=$1
 SUB_COMMAND_NAME=$2
-DOTFILES_DIR="~/.dotfiles"
 
 sub_help () {
   echo "Usage: $BIN_NAME <command>"
@@ -11,16 +10,10 @@ sub_help () {
   echo "Commands:"
   echo "   clean            Clean up caches (brew, nvm, gem)"
   echo "   dock             Apply macOS Dock settings"
-  echo "   edit             Open dotfiles in IDE ($DOTFILES_IDE) and Git GUI ($DOTFILES_GIT_GUI)"
   echo "   help             This help message"
   echo "   macos            Apply macOS system defaults"
   echo "   restore          Restore applications settings using mackup"
   echo "   update           Update packages and pkg managers (OS, brew, npm, gem)"
-}
-
-sub_edit () {
-  sh -c "$DOTFILES_IDE $DOTFILES_DIR"
-  sh -c "$DOTFILES_GIT_GUI $DOTFILES_DIR"
 }
 
 sub_update () {
@@ -47,14 +40,14 @@ sub_restore () {
 }
 
 sub_macos () {
-  for DEFAULTS_FILE in "${DOTFILES_DIR}"/macos/defaults*.sh; do
-    echo "Applying ${DEFAULTS_FILE}" && $DOTFILES_DIR/$DEFAULTS_FILE
+  for FILE in $(ls -A ~/.dotfiles/macos/defaults*.sh); do
+    echo "Applying ${FILE}" && $FILE
   done
   echo "Done. Some changes may require a logout/restart to take effect."
 }
 
 sub_dock () {
-  "${DOTFILES_DIR}/macos/dock.sh" && echo "Dock reloaded."
+  ~/.dotfiles/macos/dock.sh && echo "Dock reloaded."
 }
 
 case $COMMAND_NAME in
