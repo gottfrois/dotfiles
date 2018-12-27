@@ -44,8 +44,8 @@ brew bundle --file=$DOTFILES/install/Brewfile
 echo "Installing brew recipes from $DOTFILES/install/Caskfile"
 brew bundle --file=$DOTFILES/install/Caskfile
 
-echo "Making ZSH the default shell environment..."
-chsh -s $(which zsh)
+echo "Installing oh-my-zsh..."
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "Creating Code directory..."
 mkdir -p $HOME/Code
@@ -57,6 +57,9 @@ do
   rm -rf $HOME/$FILE
   ln -s $DOTFILES/config/$FILE $HOME/$FILE
 done
+
+echo "Reloading shell..."
+source ~/.zshrc
 
 if ! [ -d $HOME/.nvm/.git ]
 then
@@ -70,7 +73,7 @@ fi
 if ! [ -f $HOME/.rvm/VERSION ]
 then
   echo "Installing RVM..."
-  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
   curl -sSL https://get.rvm.io | bash -s stable --ruby
   echo "Installing Ruby gems..."
   gem install $(cat $DOTFILES/install/Gemfile)
@@ -85,10 +88,7 @@ fi
 echo "Creating symlink $HOME/.mackup.cfg => $DOTFILES/config/.mackup.cfg"
 ln -s $DOTFILES/config/.mackup.cfg $HOME/.mackup.cfg
 
-# Set macOS & other apps defaults
-# We run this last because this will reload the shell
-dotfiles macos
 dotfiles dock
+dotfiles macos
 
-# Clean up caches
-dotfiles clean
+echo "Done!"

@@ -23,7 +23,10 @@ bash -c "`curl -fsSL https://raw.githubusercontent.com/gottfrois/dotfiles/master
 This will clone (using git), or download (using curl or wget), this repo to ~/.dotfiles
 and initiate installation.
 
-Finally restore applications settings with:
+Since Mackup uses Google Drive to store application settings, you will need to
+launch the Google Drive app installed previously to complete installation.
+
+Once done, run the following command to restore your application settings:
 
 ```
 dotfiles restore
