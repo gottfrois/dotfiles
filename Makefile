@@ -2,6 +2,7 @@ SHELL = /bin/bash
 DOTFILES_DIR := $(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 NVM_DIR := $(HOME)/.nvm
+RVM_DIR := $(HOME)/.rvm
 export XDG_CONFIG_HOME := $(HOME)/.config
 export STOW_DIR := $(DOTFILES_DIR)
 
@@ -9,7 +10,7 @@ all: macos
 
 macos: sudo core-macos packages link
 
-core-macos: brew oh-my-zsh git npm
+core-macos: brew git oh-my-zsh npm rvm
 
 stow-macos: brew
 	is-executable stow || brew install stow
@@ -44,6 +45,13 @@ npm:
 	if ! [ -d $(NVM_DIR)/.git ]; then git clone https://github.com/creationix/nvm.git $(NVM_DIR); fi
 	. $(NVM_DIR)/nvm.sh; nvm install --lts
 
+rvm:
+	if ! [ -d $(RVM_DIR)/VERSION ]
+	then
+		gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+		curl -sSL https://get.rvm.io | bash -s stable --ruby
+	fi
+
 brew-packages: brew
 	brew bundle --file=$(DOTFILES_DIR)/install/Brewfile
 
@@ -55,5 +63,5 @@ cask-apps: brew
 node-packages: npm
 	. $(NVM_DIR)/nvm.sh; npm install -g $(shell cat install/npmfile)
 
-# gems: ruby
-# 	gem install --no-rdoc --no-ri $(shell cat install/Gemfile)
+gems: rvm
+	gem install --no-rdoc --no-ri $(shell cat install/Gemfile)
