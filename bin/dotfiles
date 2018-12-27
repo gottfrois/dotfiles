@@ -14,6 +14,12 @@ sub_help () {
   echo "   macos            Apply macOS system defaults"
   echo "   restore          Restore applications settings using mackup"
   echo "   update           Update packages and pkg managers (OS, brew, npm, gem)"
+  echo "   upgrade          Pull latest master branch for ~/.dotfiles repo"
+}
+
+sub_upgrade () {
+  echo "Upgrading ~/.dotfiles repository..."
+  cd ~/.dotfiles && git pull
 }
 
 sub_update () {

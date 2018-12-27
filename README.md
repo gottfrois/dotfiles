@@ -42,6 +42,7 @@ Commands:
    macos            Apply macOS system defaults
    restore          Restore applications settings using mackup
    update           Update packages and pkg managers (OS, brew, npm, gem)
+   upgrade          Pull latest master branch for ~/.dotfiles repo
 ```
 
 ## Thanks
