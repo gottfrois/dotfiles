@@ -44,8 +44,8 @@ defaults write com.apple.sound.beep.feedback -bool false
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# Menu bar: disable transparency
-defaults write com.apple.universalaccess reduceTransparency -bool true
+# Menu bar: enable transparency
+defaults write com.apple.universalaccess reduceTransparency -bool false
 
 # Menu bar: show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent YES
