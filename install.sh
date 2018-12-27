@@ -34,9 +34,10 @@ fi
 echo "Updating brew recipes..."
 brew update
 
-echo "Installing apps & dependencies using brew bundler files..."
 brew tap homebrew/bundle
+echo "Installing brew recipes from ${DOTFILES}/install/Brewfile"
 brew bundle --file=$DOTFILES/install/Brewfile
+echo "Installing brew recipes from ${DOTFILES}/install/Caskfile"
 brew bundle --file=$DOTFILES/install/Caskfile
 
 echo "Making ZSH the default shell environment..."
