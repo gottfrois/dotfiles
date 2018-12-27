@@ -2,15 +2,15 @@
 
 SOURCE="https://github.com/gottfrois/dotfiles"
 TARBALL="$SOURCE/tarball/master"
-TARGET="$HOME/.dotfiles"
-TAR_CMD="tar -xzv -C "$TARGET" --strip-components=1 --exclude='{.gitignore}'"
+DOTFILES="$HOME/.dotfiles"
+TAR_CMD="tar -xzv -C "$DOTFILES" --strip-components=1 --exclude='{.gitignore}'"
 
 is_executable() {
   type "$1" > /dev/null 2>&1
 }
 
 if is_executable "git"; then
-  CMD="git clone $SOURCE $TARGET"
+  CMD="git clone $SOURCE $DOTFILES"
 elif is_executable "curl"; then
   CMD="curl -#L $TARBALL | $TAR_CMD"
 elif is_executable "wget"; then
@@ -23,7 +23,7 @@ if [ -z "$CMD" ]; then
 fi
 
 echo "Setting up your Mac..."
-mkdir -p "$TARGET"
+mkdir -p "$DOTFILES"
 eval "$CMD"
 
 echo "Installing brew..."
@@ -36,8 +36,8 @@ brew update
 
 echo "Installing apps & dependencies using brew bundler files..."
 brew tap homebrew/bundle
-brew bundle --file=./install/Brewfile
-brew bundle --file=./install/Caskfile
+brew bundle --file=$DOTFILES/install/Brewfile
+brew bundle --file=$DOTFILES/install/Caskfile
 
 echo "Making ZSH the default shell environment..."
 chsh -s $(which zsh)
@@ -48,9 +48,9 @@ mkdir $HOME/Code
 # Copy & Link files in config
 for FILE in config/
 do
-  echo "Replacing ${HOME}/${FILE} to ${HOME}/.dotfiles/${FILE}..."
+  echo "Replacing ${HOME}/${FILE} to ${DOTFILES}/${FILE}..."
   rm -rf $HOME/$FILE
-  ln -s $HOME/.dotfiles/$FILE $HOME/$FILE
+  ln -s $DOTFILES/$FILE $HOME/$FILE
 done
 
 if ! [ -d $(HOME)/.nvm/.git ]
@@ -77,8 +77,8 @@ then
   apm install --packages-file install/Atomfile
 fi
 
-echo "Creating symlink ${HOME}/.mackup.cfg => ${HOME}/.dotfiles/config/.mackup.cfg"
-ln -s $HOME/.dotfiles/config/.mackup.cfg $HOME/.mackup.cfg
+echo "Creating symlink ${HOME}/.mackup.cfg => ${DOTFILES}/config/.mackup.cfg"
+ln -s $DOTFILES/config/.mackup.cfg $HOME/.mackup.cfg
 
 # Set macOS & other apps defaults
 # We run this last because this will reload the shell
