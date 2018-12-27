@@ -8,7 +8,7 @@ Feel free to explore and copy what you need, at your own risk!
 
 On a sparkling fresh installation of macOS:
 
-```sh
+```
 sudo softwareupdate -i -a
 xcode-select --install
 ```
@@ -16,7 +16,7 @@ xcode-select --install
 The Xcode Command Line Tools includes git and make (not available on stock macOS).
 Then, install this repo with curl available:
 
-```sh
+```
 bash -c "`curl -fsSL https://raw.githubusercontent.com/gottfrois/dotfiles/master/install.sh`"
 ```
 
@@ -25,14 +25,14 @@ and initiate installation.
 
 Finally restore applications settings with:
 
-```sh
+```
 dotfiles restore
 ```
 
 ## The `dotfiles` command
 
-```sh
-./bin/dotfiles help
+```
+$ dotfiles help
 Usage: dotfiles <command>
 
 Commands:
