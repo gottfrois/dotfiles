@@ -48,7 +48,7 @@ echo "Making ZSH the default shell environment..."
 chsh -s $(which zsh)
 
 echo "Creating Code directory..."
-mkdir $HOME/Code
+mkdir -p $HOME/Code
 
 # Copy & Link files in config
 for FILE in config/
