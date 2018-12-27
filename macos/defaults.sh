@@ -232,6 +232,12 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true Ope
 # Dock, Dashboard and hot corners                                             #
 ###############################################################################
 
+# Set the icon size of Dock items to 36 pixels
+defaults write com.apple.dock tilesize -int 35
+
+# Enable dock magnification
+defaults write com.apple.dock magnification -int 1
+
 # Dark menu bar and dock
 defaults write $HOME/Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme -string "Dark"
 
