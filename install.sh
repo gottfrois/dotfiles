@@ -75,8 +75,6 @@ then
   echo "Installing RVM..."
   curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
   curl -sSL https://get.rvm.io | bash -s stable --ruby
-  echo "Installing Ruby gems..."
-  gem install $(cat $DOTFILES/install/Gemfile)
 fi
 
 if ! [ -d $HOME/.atom/packages ]
