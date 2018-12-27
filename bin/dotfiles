@@ -41,7 +41,7 @@ sub_restore () {
 
 sub_macos () {
   for FILE in $(ls -A ~/.dotfiles/macos/defaults*.sh); do
-    echo "Applying ${FILE}" && $FILE
+    echo "Applying $FILE" && $FILE
   done
   echo "Done. Some changes may require a logout/restart to take effect."
 }

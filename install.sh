@@ -39,9 +39,9 @@ echo "Updating brew recipes..."
 brew update
 
 brew tap homebrew/bundle
-echo "Installing brew recipes from ${DOTFILES}/install/Brewfile"
+echo "Installing brew recipes from $DOTFILES/install/Brewfile"
 brew bundle --file=$DOTFILES/install/Brewfile
-echo "Installing brew recipes from ${DOTFILES}/install/Caskfile"
+echo "Installing brew recipes from $DOTFILES/install/Caskfile"
 brew bundle --file=$DOTFILES/install/Caskfile
 
 echo "Making ZSH the default shell environment..."
@@ -53,7 +53,7 @@ mkdir -p $HOME/Code
 # Copy & Link files in config
 for FILE in $(ls -A config)
 do
-  echo "Replacing ${HOME}/${FILE} to ${DOTFILES}/${FILE}..."
+  echo "Replacing $HOME/$FILE to $DOTFILES/$FILE..."
   rm -rf $HOME/$FILE
   ln -s $DOTFILES/$FILE $HOME/$FILE
 done
@@ -82,7 +82,7 @@ then
   apm install --packages-file $DOTFILES/install/Atomfile
 fi
 
-echo "Creating symlink ${HOME}/.mackup.cfg => ${DOTFILES}/config/.mackup.cfg"
+echo "Creating symlink $HOME/.mackup.cfg => $DOTFILES/config/.mackup.cfg"
 ln -s $DOTFILES/config/.mackup.cfg $HOME/.mackup.cfg
 
 # Set macOS & other apps defaults

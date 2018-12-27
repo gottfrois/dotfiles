@@ -38,7 +38,6 @@ Usage: dotfiles <command>
 Commands:
    clean            Clean up caches (brew, nvm, gem)
    dock             Apply macOS Dock settings
-   edit             Open dotfiles in IDE () and Git GUI ()
    help             This help message
    macos            Apply macOS system defaults
    restore          Restore applications settings using mackup
