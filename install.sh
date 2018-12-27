@@ -55,7 +55,7 @@ for FILE in $(ls -A $DOTFILES/config)
 do
   echo "Replacing $HOME/$FILE to $DOTFILES/$FILE..."
   rm -rf $HOME/$FILE
-  ln -s $DOTFILES/$FILE $HOME/$FILE
+  ln -s $DOTFILES/config/$FILE $HOME/$FILE
 done
 
 if ! [ -d $HOME/.nvm/.git ]
