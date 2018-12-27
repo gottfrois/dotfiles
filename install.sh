@@ -51,7 +51,7 @@ echo "Creating Code directory..."
 mkdir -p $HOME/Code
 
 # Copy & Link files in config
-for FILE in $(ls -A config)
+for FILE in $(ls -A $DOTFILES/config)
 do
   echo "Replacing $HOME/$FILE to $DOTFILES/$FILE..."
   rm -rf $HOME/$FILE
