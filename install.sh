@@ -61,15 +61,6 @@ done
 echo "Reloading shell..."
 source ~/.zshrc
 
-if ! [ -d $HOME/.nvm/.git ]
-then
-  echo "Installing NPM..."
-  git clone https://github.com/creationix/nvm.git $HOME/.nvm
-  . $HOME/.nvm/nvm.sh; nvm install --lts
-  echo "Installing Node packages..."
-  . $HOME/.nvm/nvm.sh; npm install -g $(cat $DOTFILES/install/Npmfile)
-fi
-
 if ! [ -f $HOME/.rvm/VERSION ]
 then
   echo "Installing RVM..."
@@ -83,10 +74,14 @@ then
   apm install --packages-file $DOTFILES/install/Atomfile
 fi
 
+if is_executable "npm"; then
+  echo "Installing Node packages..."
+  npm install -g $(cat $DOTFILES/install/Npmfile)
+fi
+
 echo "Creating symlink $HOME/.mackup.cfg => $DOTFILES/config/.mackup.cfg"
 ln -s $DOTFILES/config/.mackup.cfg $HOME/.mackup.cfg
 
-dotfiles dock
-dotfiles macos
-
 echo "Done!"
+echo "You may now run dotfiles dock"
+echo "You may now run dotfiles macos"
