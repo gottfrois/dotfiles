@@ -1,3 +1,5 @@
+tap "shyiko/kubesec"
+
 brew "coreutils"
 brew "ctop"
 brew "curl"
