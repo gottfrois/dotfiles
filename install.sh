@@ -44,8 +44,8 @@ brew bundle --file=$DOTFILES/install/Brewfile
 echo "Installing brew recipes from $DOTFILES/install/Caskfile"
 brew bundle --file=$DOTFILES/install/Caskfile
 
-echo "Making ZSH the default shell environment..."
-chsh -s $(which zsh)
+echo "Installing oh-my-zsh..."
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "Creating Code directory..."
 mkdir -p $HOME/Code
@@ -58,22 +58,14 @@ do
   ln -s $DOTFILES/config/$FILE $HOME/$FILE
 done
 
-if ! [ -d $HOME/.nvm/.git ]
-then
-  echo "Installing NPM..."
-  git clone https://github.com/creationix/nvm.git $HOME/.nvm
-  . $HOME/.nvm/nvm.sh; nvm install --lts
-  echo "Installing Node packages..."
-  . $HOME/.nvm/nvm.sh; npm install -g $(cat $DOTFILES/install/Npmfile)
-fi
+echo "Reloading shell..."
+source ~/.zshrc
 
 if ! [ -f $HOME/.rvm/VERSION ]
 then
   echo "Installing RVM..."
-  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
   curl -sSL https://get.rvm.io | bash -s stable --ruby
-  echo "Installing Ruby gems..."
-  gem install $(cat $DOTFILES/install/Gemfile)
 fi
 
 if ! [ -d $HOME/.atom/packages ]
@@ -82,13 +74,14 @@ then
   apm install --packages-file $DOTFILES/install/Atomfile
 fi
 
+if is_executable "npm"; then
+  echo "Installing Node packages..."
+  npm install -g $(cat $DOTFILES/install/Npmfile)
+fi
+
 echo "Creating symlink $HOME/.mackup.cfg => $DOTFILES/config/.mackup.cfg"
 ln -s $DOTFILES/config/.mackup.cfg $HOME/.mackup.cfg
 
-# Set macOS & other apps defaults
-# We run this last because this will reload the shell
-dotfiles macos
-dotfiles dock
-
-# Clean up caches
-dotfiles clean
+echo "Done!"
+echo "You may now run dotfiles dock"
+echo "You may now run dotfiles macos"

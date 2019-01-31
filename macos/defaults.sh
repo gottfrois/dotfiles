@@ -44,8 +44,8 @@ defaults write com.apple.sound.beep.feedback -bool false
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# Menu bar: disable transparency
-defaults write com.apple.universalaccess reduceTransparency -bool true
+# Menu bar: enable transparency
+defaults write com.apple.universalaccess reduceTransparency -bool false
 
 # Menu bar: show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent YES
@@ -83,7 +83,7 @@ defaults write com.apple.CrashReporter DialogType -string "none"
 sudo systemsetup -setrestartfreeze on
 
 # Disable Notification Center and remove the menu bar icon
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+# launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
 # Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
@@ -104,7 +104,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Automatically illuminate built-in MacBook keyboard in low light
@@ -231,6 +231,12 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true Ope
 ###############################################################################
 # Dock, Dashboard and hot corners                                             #
 ###############################################################################
+
+# Set the icon size of Dock items to 36 pixels
+defaults write com.apple.dock tilesize -int 35
+
+# Enable dock magnification
+defaults write com.apple.dock magnification -int 1
 
 # Dark menu bar and dock
 defaults write $HOME/Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme -string "Dark"
