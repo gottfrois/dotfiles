@@ -63,9 +63,15 @@ source ~/.zshrc
 
 if ! [ -f $HOME/.rvm/VERSION ]
 then
-  echo "Installing RVM..."
+  echo "Installing Ruby Versions Manager..."
   curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
   curl -sSL https://get.rvm.io | bash -s stable --ruby
+fi
+
+if ! [ -f $HOME/.nvm/nvm.sh ]
+then
+  echo "Installing Node Versions Manager..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 fi
 
 if ! [ -d $HOME/.atom/packages ]
