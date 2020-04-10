@@ -71,7 +71,7 @@ fi
 if ! [ -f $HOME/.nvm/nvm.sh ]
 then
   echo "Installing Node Versions Manager..."
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 fi
 
 if ! [ -d $HOME/.atom/packages ]

@@ -3,6 +3,7 @@ tap "homebrew/cask-fonts"
 
 cask "1password"
 cask "alfred"
+cask "altair-graphql-client"
 cask "atom"
 cask "cleanmymac"
 cask "cyberduck"
