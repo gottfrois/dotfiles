@@ -61,27 +61,23 @@ done
 echo "Reloading shell..."
 source ~/.zshrc
 
-if ! [ -f $HOME/.rvm/VERSION ]
-then
-  echo "Installing Ruby Versions Manager..."
-  curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
-  curl -sSL https://get.rvm.io | bash -s stable --ruby
-fi
+# TODO replace with VSCode
+# if ! [ -d $HOME/.atom/packages ]
+# then
+#   echo "Installing Atom packages..."
+#   apm install --packages-file $DOTFILES/install/Atomfile
+# fi
 
-if ! [ -f $HOME/.nvm/nvm.sh ]
-then
-  echo "Installing Node Versions Manager..."
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-fi
-
-if ! [ -d $HOME/.atom/packages ]
-then
-  echo "Installing Atom packages..."
-  apm install --packages-file $DOTFILES/install/Atomfile
+if is_executable "asdf"; then
+  echo "Adding asdf plugins..."
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+  asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+  asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 fi
 
 if is_executable "npm"; then
-  echo "Installing Node packages..."
+  echo "Installing NPM packages..."
   npm install -g $(cat $DOTFILES/install/Npmfile)
 fi
 

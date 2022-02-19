@@ -1,3 +1,4 @@
+alias tf="terraform"
 alias g="git"
 alias gs="git status"
 alias fixup="git commit --fixup"

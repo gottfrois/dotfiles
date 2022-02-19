@@ -29,15 +29,13 @@ sub_update () {
   brew upgrade
   npm install npm -g
   npm update -g
-  rvm get stable
+  asdf update
 }
 
 sub_clean () {
   echo "Cleaning caches..."
   brew cleanup
   gem cleanup
-  . "$NVM_DIR/nvm.sh"; nvm cache clear
-  rvm cleanup all
 }
 
 sub_restore () {
