@@ -106,8 +106,6 @@ export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_byte
 # The next line enables shell command completion for gcloud.
 # if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-eval "$(pyenv init -)"
-
 export PATH="/usr/local/opt/mongodb-community@3.6/bin:$PATH"
 
 . /usr/local/opt/asdf/asdf.sh
