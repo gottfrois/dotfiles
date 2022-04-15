@@ -1,5 +1,4 @@
 tap "boz/repo"
-tap "shyiko/kubesec"
 
 brew "asdf"
 brew "boz/repo/kail"
