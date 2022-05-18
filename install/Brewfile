@@ -1,4 +1,5 @@
 tap "boz/repo"
+tap "mongodb/brew"
 
 brew "asdf"
 brew "boz/repo/kail"
@@ -13,6 +14,7 @@ brew "htop"
 brew "k9s"
 brew "kubectl"
 brew "mackup"
+brew "mongodb-database-tools"
 brew "openssl"
 brew "postgresql"
 brew "shyiko/kubesec/kubesec"
