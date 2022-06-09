@@ -2,6 +2,7 @@ tap "boz/repo"
 tap "mongodb/brew"
 
 brew "asdf"
+brew "awscli"
 brew "boz/repo/kail"
 brew "coreutils"
 brew "curl"
