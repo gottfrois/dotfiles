@@ -13,3 +13,4 @@ alias cop="git diff --name-only --diff-filter=MA | xargs bundle exec rubocop --f
 alias cop-b="git diff origin/master..HEAD --name-only --diff-filter=MA | xargs bundle exec rubocop --force-exclusion -c .rubocop.yml -a"
 alias cop-s="git diff --cached --name-only --diff-filter=MA | xargs bundle exec rubocop --force-exclusion -c .rubocop.yml -a"
 alias cop-w="git diff --name-only --diff-filter=MA | xargs bundle exec rubocop --force-exclusion -c .rubocop.yml -a"
+alias console="kubectl exec -it --namespace textmaster --container irb $(kubectl --namespace textmaster get pods --selector app.kubernetes.io/name=irb -o jsonpath='{.items[0].metadata.name}') -- bundle exec pry -r ./config/environment"
