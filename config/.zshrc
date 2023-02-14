@@ -95,19 +95,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Enables Elixir IEX history
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
 
-# # Loads NVM
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="/usr/local/opt/mongodb-community@3.6/bin:$PATH"
+# Add gcloud components to PATH for scripting
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/gottfrois/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/gottfrois/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/gottfrois/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/gottfrois/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 . /usr/local/opt/asdf/libexec/asdf.sh
