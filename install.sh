@@ -33,16 +33,21 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 echo "Installing brew..."
 if test ! $(which brew); then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-echo "Updating brew recipes..."
-brew update
+if is_executable "brew"; then
+  echo "Updating brew recipes..."
+  brew update
 
-brew tap homebrew/bundle
-echo "Installing brew recipes from $DOTFILES/install/Brewfile"
-brew bundle --file=$DOTFILES/install/Brewfile
-echo "Installing brew recipes from $DOTFILES/install/Caskfile"
-brew bundle --file=$DOTFILES/install/Caskfile
+  brew tap homebrew/bundle
+  echo "Installing brew recipes from $DOTFILES/install/Brewfile"
+  brew bundle --file=$DOTFILES/install/Brewfile
+  echo "Installing brew recipes from $DOTFILES/install/Caskfile"
+  brew bundle --file=$DOTFILES/install/Caskfile
+fi
 
 echo "Installing oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
