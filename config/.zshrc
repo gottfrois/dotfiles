@@ -83,18 +83,10 @@ fi
 # Load custom commands
 export PATH="$DOTFILES/bin:$PATH"
 
-# Local bin directories before anything else
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
 # Add node to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.node/bin"
 
 # Enables Elixir IEX history
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
-
-# Add gcloud components to PATH for scripting
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 . $(brew --prefix asdf)/libexec/asdf.sh
