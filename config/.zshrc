@@ -80,6 +80,9 @@ fi
 #     eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 # fi
 
+# Fixes "[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called"
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # Load custom commands
 export PATH="$DOTFILES/bin:$PATH"
 
