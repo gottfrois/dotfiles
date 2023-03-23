@@ -16,6 +16,7 @@ brew "k9s"
 brew "kubectl"
 brew "mackup"
 brew "openssl"
+brew "pinentry-mac"
 brew "shared-mime-info"
 # brew "shyiko/kubesec/kubesec" # not working on Apple Silicon
 brew "terraform"
