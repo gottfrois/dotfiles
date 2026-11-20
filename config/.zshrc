@@ -4,81 +4,25 @@ export DOTFILES=$HOME/.dotfiles
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Name of the theme to load (see ~/.oh-my-zsh/themes/).
 ZSH_THEME="robbyrussell"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to disable command auto-correction.
-# DISABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# Command execution time stamp format in the history command output.
 HIST_STAMPS="dd/mm/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
+# Custom folder in place of $ZSH/custom.
 ZSH_CUSTOM=$DOTFILES/custom
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
+# Plugins to load (see ~/.oh-my-zsh/plugins/).
 plugins=(git kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-export LC_ALL=en_US.UTF-8
+# Language environment
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='mvim'
-else
-  export EDITOR='vim'
-fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# GPG
-# if [ -f ~/.gnupg/.gpg-agent-info ] && [ -n "$(pgrep gpg-agent)" ]; then
-#     source ~/.gnupg/.gpg-agent-info
-#     export GPG_AGENT_INFO
-# else
-#     eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
-# fi
+export EDITOR='vim'
 
 # Fixes "[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -86,10 +30,25 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # Load custom commands
 export PATH="$DOTFILES/bin:$PATH"
 
-# Add node to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.node/bin"
-
 # Enables Elixir IEX history
 export ERL_AFLAGS="-kernel shell_history enabled -kernel shell_history_file_bytes 1024000"
 
-. $(brew --prefix asdf)/libexec/asdf.sh
+export PATH=$PATH:$HOME/.maestro/bin
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Local binaries (also used by the cua-driver-rs installer)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Android Studio
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# asdf shims first, so that .tool-versions selects the tool versions.
+export PATH="$HOME/.asdf/shims:$PATH"

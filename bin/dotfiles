@@ -38,7 +38,28 @@ sub_clean () {
   gem cleanup
 }
 
+link_google_drive () {
+  local link="$HOME/Google Drive"
+  [ -e "$link" ] && return 0
+
+  local drives=("$HOME"/Library/CloudStorage/GoogleDrive-*)
+  if [ ! -d "${drives[0]}" ]; then
+    echo "Google Drive folder not found in ~/Library/CloudStorage." >&2
+    echo "Open the Google Drive app, sign in, then run this command again." >&2
+    return 1
+  fi
+  if [ ${#drives[@]} -gt 1 ]; then
+    echo "More than one Google Drive account found. Create the symlink manually:" >&2
+    echo "  ln -s \"$HOME/Library/CloudStorage/GoogleDrive-<account>\" \"$link\"" >&2
+    return 1
+  fi
+
+  echo "Creating symlink $link => ${drives[0]}"
+  ln -s "${drives[0]}" "$link"
+}
+
 sub_restore () {
+  link_google_drive || exit 1
   echo "Restoring applications settings..."
   mackup restore
 }
